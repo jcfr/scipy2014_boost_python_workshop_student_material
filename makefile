@@ -6,8 +6,16 @@ BOOST_LINK_FLAGS = -L/usr/local/lib -lboost_python3
 
 ALL_FLAGS = $(BOOST_COMPILE_FLAGS) $(BOOST_LINK_FLAGS) $(PYTHON_COMPILE_FLAGS) $(PYTHON_LINK_FLAGS) 
 
+%$(PYTHON_EXTENSION_SUFFIX): %.cpp
+	g++ $< -o $@ $(ALL_FLAGS) -fPIC -shared
+
 plumbing_test: plumbing_test.cpp
 	g++ plumbing_test.cpp -o plumbing_test $(ALL_FLAGS)
 
-smoke_test: smoke_test.cpp
-	g++ smoke_test.cpp -o smoke_test$(PYTHON_EXTENSION_SUFFIX) $(ALL_FLAGS) -fPIC -shared
+smoke_test: smoke_test$(PYTHON_EXTENSION_SUFFIX) ;
+
+hello_world: hello_world$(PYTHON_EXTENSION_SUFFIX) ;
+
+clean:
+	rm -f *$(PYTHON_EXTENSION_SUFFIX)
+	rm -f *.o
