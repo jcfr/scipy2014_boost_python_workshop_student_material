@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
 
-void hello_world(const std::string& name="world")
+void greet()
 {
-  std::cout << "Hello, " << name << std::endl;
+  std::cout << "Hello, world!" << name << std::endl;
 }
+
