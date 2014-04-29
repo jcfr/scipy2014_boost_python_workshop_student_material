@@ -3,6 +3,6 @@
 
 void greet()
 {
-  std::cout << "Hello, world!" << name << std::endl;
+    std::cout << "Hello, world!" << std::endl;
 }
 
