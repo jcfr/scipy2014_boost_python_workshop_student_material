@@ -1,3 +1,4 @@
+#include <ctime>
 #include <map>
 #include <string>
 #include <vector>
@@ -95,7 +96,8 @@ std::vector<int> play(const Player& p1,
 class RandomMoveGenerator
 {
 public:
-    RandomMoveGenerator() : dist_(1, 3) 
+    RandomMoveGenerator() : rng_(std::time(0)),
+			    dist_(1, 3) 
     {}
 
     Move operator()() {
