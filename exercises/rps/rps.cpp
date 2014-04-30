@@ -74,6 +74,8 @@ public:
     virtual Move nextMove(const std::vector<Round>& history,
 			  unsigned char my_pos) const = 0;
 
+    const std::string& name() const { return name_; }
+
 private:
     std::string name_;
 };
@@ -156,12 +158,28 @@ public:
     }
 };
 
-void test()
+std::string test()
 {
     TitForTat p1("t4t");
     Random p2("random");
     std::vector<int> results = play(p1, p2, 100);
+
+    std::vector<int>::size_type p1_wins, p2_wins;
+    p1_wins = p2_wins = 0;
+
     BOOST_FOREACH(int r, results) {
+	if (-1 == r)
+	    ++p1_wins;
+	else if (1 == r)
+	    ++p2_wins;
+	
 	std::cout << r << "\n";
     }
+
+    if (p1_wins > p2_wins)
+	return "Player " + p1.name() + " wins!";
+    else if (p2_wins > p1_wins)
+	return "Player " + p2.name() + " wins!";
+    else
+	return "It was a tie!";
 }
