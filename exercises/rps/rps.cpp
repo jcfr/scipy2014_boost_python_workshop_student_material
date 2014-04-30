@@ -99,9 +99,9 @@ std::vector<int> play(const Player& p1,
 class RandomMoveGenerator
 {
 public:
-    RandomMoveGenerator() : rng_(std::time(0)),
-			    dist_(1, 3) 
-    {}
+    RandomMoveGenerator(int seed) : rng_(seed),
+				    dist_(1, 3)
+	{}
 
     Move operator()() {
 	switch (dist_(rng_)) {
@@ -125,6 +125,11 @@ private:
     boost::random::uniform_int_distribution<> dist_;
 };
 
+Move randomMove() {
+    static RandomMoveGenerator rmg(std::time(0));
+    return rmg();
+}
+
 class Random : public Player
 {
 public:
@@ -135,11 +140,8 @@ public:
     Move nextMove(const std::vector<Round>&,
 		  unsigned char) const
     {
-	return rmg_();
+	return randomMove();
     }
-    
-private:
-    mutable RandomMoveGenerator rmg_;
 };
 
 class TitForTat : public Player
@@ -155,7 +157,7 @@ public:
 	assert(my_pos == 0 || my_pos == 1);
 
 	if (history.empty())
-	    return RandomMoveGenerator()();
+	    return randomMove();
 
 	const Round& r = *history.rbegin();
 	return (my_pos == 0) ? r.p2 : r.p1;
