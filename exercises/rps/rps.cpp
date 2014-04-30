@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 
-#include <boost/array.hpp>
 #include <boost/foreach.hpp>
 #include <boost/random.hpp>
 
@@ -42,14 +41,15 @@ const ScoreMap& scoreMap() {
     return smap;
 }
 
-typedef boost::array<Move, 2> Round;
+struct Round
+{
+    Round(Move p1_move, Move p2_move) :
+	p1(p1_move),
+	p2(p2_move)
+    {}
 
-Round make_round(Move m1, Move m2) {
-    Round r;
-    r[0] = m1;
-    r[1] = m2;
-    return r;
-}
+    Move p1, p2;
+};
 
 /* Compares m1 to m2.
    Returns -1 if m1 beats m2, 1 if m2 beats m1, and 0 for a tie.
@@ -61,7 +61,7 @@ int score(Move m1, Move m2) {
 std::vector<int> score(const std::vector<Round>& rounds) {
     std::vector<int> rslt;
     BOOST_FOREACH(const Round& r, rounds) {
-	rslt.push_back(score(r[0], r[1]));
+	rslt.push_back(score(r.p1, r.p2));
     }
     return rslt;
 }
@@ -82,14 +82,14 @@ private:
 
 std::vector<int> play(const Player& p1,
 		      const Player& p2,
-		      std::vector<int>::size_type rounds)
+		      std::vector<int>::size_type num_rounds)
 {
     std::vector<Round> history;
-    history.reserve(rounds);
-    for (std::vector<int>::size_type i = 0; i < rounds; ++i) {
+    history.reserve(num_rounds);
+    for (std::vector<int>::size_type i = 0; i < num_rounds; ++i) {
 	Move m1 = p1.nextMove(history, 0);
 	Move m2 = p2.nextMove(history, 1);
-	history.push_back(make_round(m1, m2));
+	history.push_back(Round(m1, m2));
     }
     
     return score(history);
@@ -131,8 +131,8 @@ public:
 	Player(name)
     {}
 
-    Move nextMove(const std::vector<Round>& history,
-		  unsigned char my_pos) const
+    Move nextMove(const std::vector<Round>&,
+		  unsigned char) const
     {
 	return rmg_();
     }
@@ -151,10 +151,13 @@ public:
     Move nextMove(const std::vector<Round>& history,
 		  unsigned char my_pos) const
     {
+	assert(my_pos == 0 || my_pos == 1);
+
 	if (history.empty())
 	    return RandomMoveGenerator()();
 
-	return (*history.rbegin())[(my_pos + 1) % 2];
+	const Round& r = *history.rbegin();
+	return (my_pos == 0) ? r.p2 : r.p1;
     }
 };
 
