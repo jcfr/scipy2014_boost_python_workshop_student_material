@@ -75,6 +75,7 @@ public:
 			  unsigned char my_pos) const = 0;
 
     const std::string& name() const { return name_; }
+    void setName(const std::string& n) { name_ = n; }
 
 private:
     std::string name_;
