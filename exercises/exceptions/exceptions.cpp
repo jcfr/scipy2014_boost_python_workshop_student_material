@@ -1,7 +1,4 @@
 #include <stdexcept>
-#include <vector>
-
-#include <boost/foreach.hpp>
 
 class MathError : public std::runtime_error
 {
@@ -9,14 +6,10 @@ public:
     MathError(const std::string& msg) : std::runtime_error(msg) {}
 };
 
-double mean(const std::vector<int>& ints)
+double divide(double x, double y)
 {
-    if (ints.empty())
-	throw MathError("Input to mean can not be empty.");
-    
-    int sum = 0;
-    BOOST_FOREACH(int i, ints) {
-	sum += i;
-    }
-    return sum / ints.size();
+    if (0 == y)
+	throw MathError("Denominator can not be 0.");
+
+    return x / y;
 }
