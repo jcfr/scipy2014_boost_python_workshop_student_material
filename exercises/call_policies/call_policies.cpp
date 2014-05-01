@@ -3,30 +3,38 @@
 class Row
 {
 public:
-    Row(std::size_t size) : data_(size, 0)
+    Row(const std::vector<int>& data,
+	std::size_t row,
+	std::size_t cols) : data_(data),
+			    row_(row),
+			    cols_(cols)
 	{}
 
     int get(std::size_t idx) const {
-	return data_[idx];
+	return data_[row_ * cols_ + idx];
     }
 
 private:
-    std::vector<int> data_;
+    const std::vector<int>& data_;
+    std::size_t row_, cols_;
 };
 
 class Matrix
 {
 public:
     Matrix(std::size_t rows,
-	   std::size_t cols) : data_(rows, Row(cols))
+	   std::size_t cols) : rows_(rows),
+			       cols_(cols),
+			       data_(rows * cols, 0)
 	{}
 
-    const Row& get(std::size_t idx) const {
-	return data_[idx];
+    Row get(std::size_t idx) const {
+	return Row(data_, idx, cols_);
     }
 
 private:
-    std::vector<Row> data_;
+    std::size_t rows_, cols_;
+    std::vector<int> data_;
 };
 
 // Exercise: Expose these classes such that `test.py` works.
