@@ -9,6 +9,4 @@ void greet()
 }
 
 BOOST_PYTHON_MODULE(hello_world)
-{
-    boost::python::def("greet", greet);
-}
+{}

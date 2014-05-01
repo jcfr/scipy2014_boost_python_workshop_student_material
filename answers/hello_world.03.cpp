@@ -1,10 +1,11 @@
+#include <iostream>
 #include <string>
 
 #include <boost/python.hpp>
 
-std::string greet(const std::string& name)
+void greet(const std::string& name)
 {
-    return "Hello, " + name + "!";
+    std::cout << "Hello, " << name << "!" << std::endl;
 }
 
 BOOST_PYTHON_MODULE(hello_world)
