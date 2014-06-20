@@ -34,6 +34,10 @@ Once you boot the image, you should be taken to an Ubuntu desktop. From there, s
 
 If all of this works, then your system is ready for the workshop.
 
+## Notes
+
+ * There's been a report that this image crashes on VMWare, but it's known to work properly on several VirtualBox installations.
+
 # Setting up a linux system #
 Using your distributions package management system, first install the following packages:
 
@@ -68,6 +72,12 @@ Next, you should run a few test to make sure the system is ready:
 ```
 
 Note that the Python executable may be `python3` or perhaps even `python2` depending on your distribution and configuration.
+
+## Notes
+
+ * On Ubuntu 12 (Precise) the boost.python package you should install is libboost-python1.46-dev.
+ * On Ubuntu 14 (Trusty) the boost.python package you should install is libboost-python1.55-dev. This can make libraries for Python 2.7, 3.3, and 3.4.
+ * On Ubuntu 14 you may need to update the `PYTHON_EXTENSION_SUFFIX` in `make.common` to `.so` rather than relying on `python3-config`. This is because `python3-config --extension-suffix` reports `@SO@` rather than `.so` for some reason.  
 
 # Setting up a Mac OS X system #
 
