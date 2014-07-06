@@ -13,7 +13,7 @@ public:
 double divide(double x, double y)
 {
     if (0 == y)
-	throw MathError("Denominator can not be 0.");
+        throw MathError("Denominator can not be 0.");
 
     return x / y;
 }
@@ -21,12 +21,12 @@ double divide(double x, double y)
 double py_divide(double x, double y)
 {
     try {
-	return divide(x, y);
-    } 
+        return divide(x, y);
+    }
     catch (const MathError& e) {
-	PyErr_SetString(PyExc_ValueError, e.what());
-	bp::throw_error_already_set();
-	return 0;
+        PyErr_SetString(PyExc_ValueError, e.what());
+        bp::throw_error_already_set();
+        return 0;
     }
 }
 
