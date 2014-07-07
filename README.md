@@ -79,6 +79,73 @@ Note that the Python executable may be `python3` or perhaps even `python2` depen
  * On Ubuntu 14 (Trusty) the boost.python package you should install is libboost-python1.55-dev. This can make libraries for Python 2.7, 3.3, and 3.4.
  * On Ubuntu 14 you may need to update the `PYTHON_EXTENSION_SUFFIX` in `make.common` to `.so` rather than relying on `python3-config`. This is because `python3-config --extension-suffix` reports `@SO@` rather than `.so` for some reason.  
 
+
+# Setting up the system for Linux, MacOSX or Windows using CMake
+
+## Windows
+
+* Download [Git](http://git-scm.com/download/win) and [CMake](http://www.cmake.org/files/v3.0/cmake-3.0.0-win32-x86.exe)
+
+* Start Git Bash
+
+```
+git clone git://github.com/jcfr/scipy2014_boost_python_workshop_student_material.git
+mkdir scipy2014_boost_python_workshop_student_material-build && cd $_
+cmake -G "Visual Studio 10 2010" ../scipy2014_boost_python_workshop_student_material-build
+cmake --build ../ --config Release
+```
+
+## Linux
+
+```
+sudo apt-get install cmake
+sudo apt-get build-essentials
+sudo apt-get install libpython-dev
+sudo apt-get libboost1.54-dev
+git clone git://github.com/jcfr/scipy2014_boost_python_workshop_student_material.git
+mkdir scipy2014_boost_python_workshop_student_material-build && cd $_
+cmake ../scipy2014_boost_python_workshop_student_material-build
+make
+```
+
+## MacOSX
+
+* Download [Git](http://git-scm.com/download/mac) and [CMake](http://www.cmake.org/files/v3.0/cmake-3.0.0-Darwin64-universal.dmg)
+
+* Install Boost and Python
+
+```
+git clone git://github.com/jcfr/scipy2014_boost_python_workshop_student_material.git
+mkdir scipy2014_boost_python_workshop_student_material-build && cd $_
+cmake ../scipy2014_boost_python_workshop_student_material-build
+make
+```
+
+## Running tests
+
+In all three cases, convenience tests have been added and can easily be run:
+```
+$ cd scipy2014_boost_python_workshop_student_material-build
+$ ctest -N
+Test project [...]
+  Test #1: plumbing_test
+  Test #2: smoke_test
+
+Total Tests: 2
+
+$ ctest
+Test project [...]
+Start 1: plumbing_test
+1/2 Test #1: plumbing_test ....................   Passed    0.02 sec
+    Start 2: smoke_test
+2/2 Test #2: smoke_test .......................   Passed    0.02 sec
+
+100% tests passed, 0 tests failed out of 2
+```
+
+ProTips: Adding the -V option to ctest will disp
+
+
 # Setting up a Mac OS X system #
 
 There are a number of ways to set up a Mac OS X system, including compiling everything yourself, [homebrew](http://brew.sh/), and [macports](http://www.macports.org/). The homebrew approach is known to 
