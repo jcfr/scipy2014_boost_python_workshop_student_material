@@ -91,7 +91,7 @@ Note that the Python executable may be `python3` or perhaps even `python2` depen
 ```
 git clone git://github.com/jcfr/scipy2014_boost_python_workshop_student_material.git
 mkdir scipy2014_boost_python_workshop_student_material-build && cd $_
-cmake -G "Visual Studio 10 2010" ../scipy2014_boost_python_workshop_student_material-build
+cmake -G "Visual Studio 10 2010" ../scipy2014_boost_python_workshop_student_material
 cmake --build ../ --config Release
 ```
 
@@ -104,7 +104,7 @@ sudo apt-get install libpython-dev
 sudo apt-get libboost1.54-dev
 git clone git://github.com/jcfr/scipy2014_boost_python_workshop_student_material.git
 mkdir scipy2014_boost_python_workshop_student_material-build && cd $_
-cmake ../scipy2014_boost_python_workshop_student_material-build
+cmake ../scipy2014_boost_python_workshop_student_material
 make
 ```
 
@@ -117,7 +117,7 @@ make
 ```
 git clone git://github.com/jcfr/scipy2014_boost_python_workshop_student_material.git
 mkdir scipy2014_boost_python_workshop_student_material-build && cd $_
-cmake ../scipy2014_boost_python_workshop_student_material-build
+cmake ../scipy2014_boost_python_workshop_student_material
 make
 ```
 
