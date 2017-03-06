@@ -16,7 +16,7 @@ you need to do the exercises.
 
 The image is packaged as an OVF 1.0 archive (.ova) that should run on most of the popular virtualization systems.
 
-You can [**download the image here**](https://www.dropbox.com/s/vs4oh9lsaiogtfy/BoostPythonWorkshop.ova).
+You can [**download the image here**](https://www.dropbox.com/s/g942rgtsjg4hkjd/BoostPythonWorkshop.ova?dl=0).
 
 Once you boot the image, you should be taken to an Ubuntu desktop. From there, start a terminal (you may need to use alt-F1 to see the launcher) and type:
 
